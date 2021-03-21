@@ -10,13 +10,11 @@ function App() {
   const [filter, setFilter] = useState('all')
   const [limitTasks, setLimitTaks] = useState([])
 
-  useEffect(() => {
-    if(localStorage.ge(todos))
-      setTodos(JSON.parse(localStorage.getItem('todos')))
-  },[])
-
   useEffect(()=> {
-    console.log('adding')
+    getFromLocalStorage()
+  },[])
+ 
+  useEffect(()=> {
     filterTasks(filter)
     saveTodoToLocalStorage()
   },[filter, todos])
@@ -64,11 +62,16 @@ function App() {
     }
   }
 
-  const saveTodoToLocalStorage = () =>{
-    if(localStorage.getItem('todos') === null){
-      localStorage.setItem('todos', JSON.stringify([]))
-    } else {
+  const saveTodoToLocalStorage = () =>{    
       localStorage.setItem('todos', JSON.stringify(todos))
+  }
+
+  const getFromLocalStorage = () =>{
+    if(localStorage.getItem('todos') === null){
+      localStorage.getItem('todos', JSON.stringify([]))
+    } else {
+      let todoFormLocal = JSON.parse(localStorage.getItem('todos'))
+      setTodos(todoFormLocal)
     }
   }
 
