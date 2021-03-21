@@ -11,7 +11,8 @@ function App() {
   const [limitTasks, setLimitTaks] = useState([])
 
   useEffect(() => {
-    setTodos(JSON.parse(localStorage.getItem('todos')))
+    if(localStorage.ge(todos))
+      setTodos(JSON.parse(localStorage.getItem('todos')))
   },[])
 
   useEffect(()=> {
